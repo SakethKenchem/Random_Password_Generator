@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
@@ -93,11 +93,10 @@
         <div id="generatedString" class="weak" readonly></div>
     </div>
 
-    <!-- Bootstrap JS and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Function to generate random string
+
         function generateString() {
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-"|}{[]:;?/>.<,';
             const length = document.getElementById("length").value;
@@ -119,7 +118,7 @@
             generatedString.className = isWeak ? "weak" : "";
 
         }
-        // function to copy to clipboard
+        //copy to clipboard
         function copyToClipboard() {
             const copyText = document.getElementById("generatedString");
             const textarea = document.createElement("textarea");
