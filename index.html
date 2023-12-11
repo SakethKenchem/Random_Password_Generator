@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password Generator</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #47d1d1;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        h2 {
+            color: #333333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: #ffffff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #generatedString {
+            font-size: 16px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            width: 100%;
+            background-color: #fafafa;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #generatedString.weak {
+            background-color: #ffdddd;
+            border-color: #ff8888;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Random Password Generator</h2>
+        <label for="length" class="form-label">Length:</label>
+        <input type="number" id="length" name="length" min="1" max="100" class="form-control mb-3">
+        <button onclick="generateString()" class="btn btn-success mb-3">Generate</button>
+        <button onclick="copyToClipboard()" class="btn btn-primary mb-3">Copy to clipboard</button>
+        <div id="generatedString" class="weak" readonly></div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Function to generate random string
+        function generateString() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-"|}{[]:;?/>.<,';
+            const length = document.getElementById("length").value;
+    
+            if (isNaN(length) || length == "" || length < 1 || length > 100) {
+                alert("Please enter a valid length between 1 and 100");
+                return;
+            }
+    
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+    
+            const generatedString = document.getElementById("generatedString");
+            generatedString.textContent = result;
+    
+            const isWeak = length < 15;
+            generatedString.className = isWeak ? "weak" : "";
+
+        }
+        // function to copy to clipboard
+        function copyToClipboard() {
+            const copyText = document.getElementById("generatedString");
+            const textarea = document.createElement("textarea");
+            textarea.value = copyText.textContent;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textarea);
+            alert("Copied the text: " + copyText.textContent);
+        }
+    </script>
+</body>
+
+</html>
